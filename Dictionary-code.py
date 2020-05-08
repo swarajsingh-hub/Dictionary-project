@@ -3,7 +3,7 @@ from difflib import get_close_matches
 
 data = json.load(open("data .json"))
 
-def translate (word):
+def translate(word):
     word = word.lower()
     if word in data:
         return data[word]
@@ -11,24 +11,24 @@ def translate (word):
         return data[word.title()]
     elif word.upper() in data:
         return data[word.upper()]
-    elif len(get_close_matches(word, data.keys())) > 0:
+    elif len(get_close_matches(word , data.keys())) > 0 :
         print("did you mean %s instead" %get_close_matches(word, data.keys())[0])
-        decide = input("press y for yes and n for n")
+        decide = input("press y for yes or n for no")
         if decide == "y":
-            return data [get_close_matches(word ,data.keys()[0])
+            return data[get_close_matches(word , data.keys())[0]]
         elif decide == "n":
-            return("you are on wrong path")
+            return("you are on wrong path ")
         else:
-            return ("you have entered wrong input just press y or n")
+            return("You have entered wrong input please enter just y or n")
     else:
-        print("You may entered wrong word or the word doesn't exist")
+        print("This word does not exist")
+
+
 
 word = input("Enter the word you want to search")
-
 output = translate(word)
-
 if type(output) == list:
-        for item in output:
-            print(item)
+    for item in output:
+        print(item)
 else:
     print(output)
